@@ -27,4 +27,4 @@ vm-read: vm-read.c
 clean:
 	rm -f thread thread.o mps mps.o print-task-info.o \
               msg msg.o vm vm.o vm-read vm-read.o proc proc.o \
-              mtask mtask.o
+              mtask mtask.o procadv procadv.o
