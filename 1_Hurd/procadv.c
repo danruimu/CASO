@@ -14,7 +14,7 @@
 
 int main ()
 {
-   int res, i;
+   int res, i, j;
    mach_port_t host_privileged_port; 
    device_t device_privileged_port;
    mach_port_t* host;
@@ -44,18 +44,30 @@ int main ()
    printf ("        processors at array 0x%x\n", processor_list);
    printf ("processor_listCnt %d\n", processor_listCnt);
 
-	procInfo = (processor_info_t) malloc(512*sizeof(int));
+	procInfo = (processor_info_t) malloc(PROCESSOR_INFO_MAX*sizeof(int));
 	host = (mach_port_t *) malloc(10*sizeof(mach_port_t));
 
    for (i=0; i < processor_listCnt; i++) {
 	   printf ("processor_list[%d] 0x%x\n", i, processor_list[i]);
 
-	   procInfoCnt = processor_listCnt;
+	   procInfoCnt = sizeof(int)*PROCESSOR_INFO_MAX;
 	   res = processor_info (processor_list[i], PROCESSOR_BASIC_INFO, host, procInfo, &procInfoCnt);
-	   if (res != KERN_SUCCESS) {
-		   fprintf (stderr, "Error getting the processor %d information (0x%x), %s\n", i, res, mach_error_string(res));
-		   exit(-1);
+	   if (res == KERN_INVALID_ARGUMENT) {
+		   fprintf (stderr, "KERN_INVALID_ARGUMENT: Error getting the processor %d information (0x%x), %s\n", i, res, mach_error_string(res));
+		   exit(1);
+	   } else if (res == MIG_ARRAY_TOO_LARGE) {
+		   fprintf (stderr, "MIG_ARRAY_TOO_LARGE: Error getting the processor %d information (0x%x), %s\n", i, res, mach_error_string(res));
+		   exit(1);
+	   } else if( res != KERN_SUCCESS) {
+		   fprintf(stderr, "UNKWON_ERR: Error getting the processor %d information (0x%x), %s\n", i, res, mach_error_string(res));
+		   exit(1);
 	   }
+
+	   for (j=0; j< procInfoCnt; ++j) {
+		   processor_basic_info_t procBasicInfo = (processor_basic_info_t) &procInfo[j];
+		   fprintf(stdout, "CPU Type:\t\t%d\n", procBasicInfo->cpu_type);
+	   }
+
    }
 }
 
