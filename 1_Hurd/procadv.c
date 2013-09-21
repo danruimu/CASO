@@ -52,20 +52,22 @@ int main ()
 
 	   procInfoCnt = sizeof(int)*PROCESSOR_INFO_MAX;
 	   res = processor_info (processor_list[i], PROCESSOR_BASIC_INFO, host, procInfo, &procInfoCnt);
-	   if (res == KERN_INVALID_ARGUMENT) {
-		   fprintf (stderr, "KERN_INVALID_ARGUMENT: Error getting the processor %d information (0x%x), %s\n", i, res, mach_error_string(res));
-		   exit(1);
-	   } else if (res == MIG_ARRAY_TOO_LARGE) {
-		   fprintf (stderr, "MIG_ARRAY_TOO_LARGE: Error getting the processor %d information (0x%x), %s\n", i, res, mach_error_string(res));
-		   exit(1);
-	   } else if( res != KERN_SUCCESS) {
-		   fprintf(stderr, "UNKWON_ERR: Error getting the processor %d information (0x%x), %s\n", i, res, mach_error_string(res));
+	   if( res != KERN_SUCCESS) {
+		   fprintf(stderr, "Error getting the processor %d information (0x%x), %s\n", i, res, mach_error_string(res));
 		   exit(1);
 	   }
 
 	   for (j=0; j< procInfoCnt; ++j) {
 		   processor_basic_info_t procBasicInfo = (processor_basic_info_t) &procInfo[j];
+		   fprintf(stdout, "------------CPU %d------------\n", j);
 		   fprintf(stdout, "CPU Type:\t\t%d\n", procBasicInfo->cpu_type);
+		   fprintf(stdout, "CPU Subtype:\t\t%d\n", procBasicInfo->cpu_subtype);
+		   if(procBasicInfo->running) fprintf(stdout, "Running?:\t\tYES\n");
+		   else fprintf(stdout, "Running?:\t\tNO\n");
+		   fprintf(stdout, "Slot number:\t\t%d\n", procBasicInfo->slot_num);
+		   if(procBasicInfo->is_master) fprintf(stdout, "Master?:\t\tYES\n");
+		   else fprintf(stdout, "Master?:\t\tNO\n");
+		   fprintf(stdout, "-----------------------------\n");
 	   }
 
    }
