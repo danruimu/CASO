@@ -1,7 +1,10 @@
-all: proc mps mtask thread vm vm-read msg
+all: proc procadv mps mtask thread vm vm-read msg
 
 proc: proc.c 
 	gcc -D_GNU_SOURCE -O -o proc proc.c
+
+procadv: procadv.c 
+	gcc -D_GNU_SOURCE -O -o procadv procadadv.c
 
 mps: mps.c print-task-info.c
 	gcc -D_GNU_SOURCE -O -o mps mps.c print-task-info.c
