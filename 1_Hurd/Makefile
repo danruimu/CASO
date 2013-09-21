@@ -4,7 +4,7 @@ proc: proc.c
 	gcc -D_GNU_SOURCE -O -o proc proc.c
 
 procadv: procadv.c 
-	gcc -D_GNU_SOURCE -O -o procadv procadadv.c
+	gcc -D_GNU_SOURCE -O -o procadv procadv.c
 
 mps: mps.c print-task-info.c
 	gcc -D_GNU_SOURCE -O -o mps mps.c print-task-info.c
