@@ -45,7 +45,7 @@ int main ()
    }
 
    for ( i=0; i<task_count; ++i) {
-	   Print_Task_info (task_list[i]);
+	   //TODO: consultar cada task, mirar si es la task que buscamos y reanudarla o pararla
    }
   
    exit(0);
