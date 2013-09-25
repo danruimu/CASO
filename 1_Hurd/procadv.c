@@ -14,7 +14,7 @@
 
 int main ()
 {
-   int res, i, j;
+   int res, i;
    mach_port_t host_privileged_port; 
    device_t device_privileged_port;
    mach_port_t* host;
@@ -57,9 +57,8 @@ int main ()
 		   exit(1);
 	   }
 
-	   for (j=0; j< procInfoCnt; ++j) {
-		   processor_basic_info_t procBasicInfo = (processor_basic_info_t) &procInfo[j];
-		   fprintf(stdout, "------------CPU %d------------\n", j);
+		   processor_basic_info_t procBasicInfo = (processor_basic_info_t) &procInfo[i];
+		   fprintf(stdout, "------------CPU %d------------\n", i);
 		   fprintf(stdout, "CPU Type:\t\t%d\n", procBasicInfo->cpu_type);
 		   fprintf(stdout, "CPU Subtype:\t\t%d\n", procBasicInfo->cpu_subtype);
 		   if(procBasicInfo->running) fprintf(stdout, "Running?:\t\tYES\n");
@@ -68,7 +67,6 @@ int main ()
 		   if(procBasicInfo->is_master) fprintf(stdout, "Master?:\t\tYES\n");
 		   else fprintf(stdout, "Master?:\t\tNO\n");
 		   fprintf(stdout, "-----------------------------\n");
-	   }
 
    }
 }
