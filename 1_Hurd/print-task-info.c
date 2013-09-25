@@ -10,7 +10,7 @@
 void Print_Task_info(task_t t)
 {
         task_basic_info_data_t task_data;
-        task_info_t ta_info = &task_data;
+        task_info_t ta_info = (task_info_t) &task_data;
         mach_msg_type_number_t task_info_outCnt = TASK_BASIC_INFO_COUNT;
 
       int res;
@@ -20,6 +20,9 @@ void Print_Task_info(task_t t)
                    mach_error_string(res));
          exit(1);
       }
+      pid_t pid = task2pid(t);
+	  printf ("---------------------------------\n");
+      printf ("      pid %d\n", pid);
       printf ("    suspend count %d\n", task_data.suspend_count);
       printf ("    base priority %d\n", task_data.base_priority);
       printf ("    virtual size %d\n", task_data.virtual_size);
@@ -30,6 +33,4 @@ void Print_Task_info(task_t t)
                                         task_data.system_time.microseconds);
       printf ("    creation time %d %d\n", task_data.creation_time.seconds,
                                         task_data.creation_time.microseconds);
-      pid_t pid = task2pid(t);
-      printf ("      pid %d\n", pid);
 }
