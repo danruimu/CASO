@@ -1,30 +1,31 @@
-all: proc procadv mps mtask thread vm vm-read msg
+PROG=proc procadv mps mtask thread vm vm-read msg
+CFLAGS=-D_GNU_SOURCE -O
+
+all: $(PROG)
 
 proc: proc.c 
-	gcc -D_GNU_SOURCE -O -o proc proc.c
+	gcc $(CFLAGS) $< -o $@
 
 procadv: procadv.c 
-	gcc -D_GNU_SOURCE -O -o procadv procadv.c
+	gcc $(CFLAGS) $< -o $@
 
 mps: mps.c print-task-info.c
-	gcc -D_GNU_SOURCE -O -o mps mps.c print-task-info.c
+	gcc $(CFLAGS) -o $@ $^
 
 mtask: mtask.c print-task-info.c
-	gcc -D_GNU_SOURCE -O -o mtask mtask.c print-task-info.c
+	gcc $(CFLAGS) -o $@ $^
 
 thread: thread.c
-	gcc -D_GNU_SOURCE -O -o thread thread.c
+	gcc $(CFLAGS) $< -o $@
 
 msg: msg.c
-	cc -D_GNU_SOURCE -O -o msg msg.c
+	cc $(CFLAGS) $< -o $@
 
 vm: vm.c
-	cc -D_GNU_SOURCE -O -o vm vm.c
+	cc $(CFLAGS) $< -o $@
 
 vm-read: vm-read.c
-	cc -D_GNU_SOURCE -O -o vm-read vm-read.c
+	cc $(CFLAGS) $< -o $@
 
 clean:
-	rm -f thread thread.o mps mps.o print-task-info.o \
-              msg msg.o vm vm.o vm-read vm-read.o proc proc.o \
-              mtask mtask.o procadv procadv.o
+	rm -f $(PROG)

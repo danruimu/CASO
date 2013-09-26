@@ -10,6 +10,7 @@
 #include <unistd.h>
 
 void thread_asshole () {
+	fprintf(stdout,"Eres un PENE con cara\n");
 	while(1);
 }
 

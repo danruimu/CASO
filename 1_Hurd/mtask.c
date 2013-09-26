@@ -43,68 +43,25 @@ int main (int argc, char *argv[])
 
 	Npids = argc - 2;
 
-   res = get_privileged_ports(&host_privileged_port, &device_privileged_port);
-   if (res != KERN_SUCCESS) {
-      printf ("Error getting privileged ports (0x%x), %s\n", res, 
-                mach_error_string(res));
-      exit(1);
-   }
+	for (i = 0; i<Npids; ++i) {
+		task_t task = pid2task(pidsEnt[i]);
 
-   printf ("privileged ports: host 0x%x  devices 0x%x\n", 
-                     host_privileged_port, device_privileged_port);
-
-   res = processor_set_default (host_privileged_port, &default_set);
-   if (res != KERN_SUCCESS) {
-	   fprintf(stderr, "Error getting the default processor set: (0x%x), %s\n", res, mach_error_string(res));
-	   exit(1);
-   }
-
-   res = host_processor_set_priv (host_privileged_port, default_set, &processor_set);
-   if (res != KERN_SUCCESS) {
-	   fprintf (stderr, "Error getting the processor set control port: (0x%x), %s\n", res, mach_error_string(res));
-	   exit(1);
-   }
-
-   res = processor_set_tasks (processor_set, &task_list, &task_count);
-   if (res != KERN_SUCCESS) {
-	   fprintf(stderr, "Error getting task array: (0x%x), %s\n", res, mach_error_string(res));
-	   exit(1);
-   }
-
-   for ( i=0; i<task_count; ++i) {
-	   task_basic_info_data_t task_data;
-	   task_info_t ta_info = (task_info_t) &task_data;
-	   mach_msg_type_number_t task_info_outCnt = TASK_BASIC_INFO_COUNT;
-
-	   res = task_info (task_list[i], TASK_BASIC_INFO, ta_info, &task_info_outCnt);
-	   if (res != KERN_SUCCESS) {
-		   fprintf (stderr, "Error getting task_info (%d), %s\n", res, mach_error_string(res));
-		   exit(1);
-	   }
-
-	   pid_t pid = task2pid(task_list[i]);
-
-	   for( j = 0; j<Npids; ++j) {
-		   if (pid==pidsEnt[j]) {
-				if (res_susp) {
-					res = task_resume (task_list[i]);
-					if (res != KERN_SUCCESS) {
-						fprintf (stderr, "Error resuming the task %d, (%d), %s\n", pidsEnt[j], res, mach_error_string(res));
-						exit (1);
-					}
-					fprintf (stdout, "Task identified by PID %d resumed\n", pidsEnt[j]);
-				} else {
-					res = task_suspend (task_list[i]);
-					if (res != KERN_SUCCESS) {
-						fprintf (stderr, "Error suspending the task %d, (%d), %s\n", pidsEnt[j], res, mach_error_string(res));
-						exit (1);
-					}
-					fprintf (stdout, "Task identified by PID %d suspended\n", pidsEnt[j]);
+		if(task == MACH_PORT_NULL) {
+			fprintf(stderr, "There is no task related to PID %d\n", pidsEnt[i]);
+		} else {
+			if (res_susp) {
+				res = task_resume(task);
+				if (res != KERN_SUCCESS) {
+					fprintf(stderr, "Error resuming task with PID %d, 0x%x, %s\n", pidsEnt[i], res, mach_error_string(res));
 				}
-		   }
-	   }
-   }
-  
-   exit(0);
+			} else {
+				res = task_suspend(task);
+				if (res != KERN_SUCCESS) {
+					fprintf(stderr, "Error suspending task with PID %d, 0x%x, %s\n", pidsEnt[i], res, mach_error_string(res));
+				}
+			}
+		}
+	}
+
 }
 
