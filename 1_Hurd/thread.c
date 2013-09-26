@@ -2,6 +2,7 @@
 #include <mach_error.h>
 #include <mach/mig_errors.h>
 #include <mach/thread_status.h>
+#include <mach/machine/thread_status.h>
 #include <mach/mach_traps.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +14,7 @@ void thread_asshole () {
 }
 
 int main () {
-	ker_return_t res;
+	kern_return_t res;
 	mach_port_t parent, child;
 	thread_state_t state_child;
 	mach_msg_type_number_t state_Cnt = THREAD_STATE_MAX;
