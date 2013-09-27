@@ -17,7 +17,7 @@ int main (int argc, char *argv[]) {
 	vm_address_t address;
 	unsigned int i;
 
-	vm_offset_t data __attribute__ ((aligned (PAGESIZE)));
+	vm_offset_t data;
 
 	parent_task = mach_task_self();
 
@@ -33,7 +33,7 @@ int main (int argc, char *argv[]) {
 		exit(1);
 	}
 
-	data = (vm_offset_t) malloc(4096);
+	data = (vm_offset_t) malloc(PAGESIZE);
 
 	res = vm_write (child_task, address, data, PAGESIZE);
 	if (res != KERN_SUCCESS) {
