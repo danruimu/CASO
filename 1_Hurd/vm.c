@@ -10,14 +10,14 @@
 
 #define	PAGESIZE	4096
 #define	ANYWHERE	1
+	
+float data[PAGESIZE/sizeof(float)] __attribute__((aligned(PAGESIZE)));
 
 int main (int argc, char *argv[]) {
 	kern_return_t res;
 	mach_port_t parent_task, child_task;
 	vm_address_t address;
 	unsigned int i;
-
-	vm_offset_t data;
 
 	parent_task = mach_task_self();
 
@@ -33,9 +33,7 @@ int main (int argc, char *argv[]) {
 		exit(1);
 	}
 
-	data = (vm_offset_t) malloc(PAGESIZE);
-
-	res = vm_write (child_task, address, data, PAGESIZE);
+	res = vm_write (child_task, address, (vm_offset_t)data, PAGESIZE);
 	if (res != KERN_SUCCESS) {
 		fprintf(stderr, "Error writing: 0x%x, %s\n", res, mach_error_string(res));
 		exit(1);
