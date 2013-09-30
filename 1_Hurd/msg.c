@@ -30,11 +30,11 @@ int main () {
 
 	if (pid == 0) {	//CHILD - SENDER
 		//TODO: Prepare the message header to be send
-		struct mach_msg_header_t sHeader;
-		sHeader->msgh_bits = MACH_MSGH_BITS_REMOTE_MASK; //mach_msg_type_t
-		sHeader->msgh_size  = 32; //mach_msg_size_t
-		sHeader->msgh_remote_port  = host_privileged_port; //mach_port_t
-		sHeader->msgh_local_port  = MACH_PORT_NULL; //mach_port_t
+		mach_msg_header_t sHeader;
+		sHeader.msgh_bits = MACH_MSGH_BITS_REMOTE_MASK; //mach_msg_type_t
+		sHeader.msgh_size  = sizeof(mach_msg_header_t); //mach_msg_size_t
+		sHeader.msgh_remote_port  = host_privileged_port; //mach_port_t
+		sHeader.msgh_local_port  = MACH_PORT_NULL; //mach_port_t
 		//sHeader->msgh_seqno  = ; //mach_port_seqno_t IGNORED ON SENT MESSAGES
 		//sHeader->msgh_id  = ; //mach_msg_id_t NOT SET OR NULL BY mach_msg
 
@@ -48,11 +48,11 @@ int main () {
 
 	} else {		//PARENT - RECEIVER
 		//TODO: Prepare the message header to be receive
-		struct mach_msg_header_t rHeader;
-		rHeader->msgh_bits = MACH_MSGH_BITS_LOCAL_MASK; //mach_msg_type_t
+		mach_msg_header_t rHeader;
+		rHeader.msgh_bits = MACH_MSGH_BITS_LOCAL_MASK; //mach_msg_type_t
 		//rHeader->msgh_size  = ; //mach_msg_size_t - TO BE READ
-		rHeader->msgh_remote_port  = MACH_PORT_NULL; //mach_port_t
-		rHeader->msgh_local_port  = host_privileged_port; //mach_port_t
+		rHeader.msgh_remote_port  = MACH_PORT_NULL; //mach_port_t
+		rHeader.msgh_local_port  = host_privileged_port; //mach_port_t
 		//rHeader->msgh_seqno  = ; //mach_port_seqno_t - TO BE READ
 		//rHeader->msgh_id  = ; //mach_msg_id_t - NOT SET OR NULL by mach_msg
 
