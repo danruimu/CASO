@@ -1,4 +1,4 @@
-PROG=proc procadv mps mtask thread thread-print msg vm vm-read
+PROG=proc procadv mps mtask thread thread-print msg vm vm-read mpsadv
 CFLAGS=-D_GNU_SOURCE -O
 CC=gcc
 
@@ -30,6 +30,9 @@ vm: vm.c
 
 vm-read: vm-read.c
 	$(CC) $(CFLAGS) $< -o $@
+
+mpsadv: mpsadv.c print-task-info.c
+	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
 	rm -f $(PROG)
