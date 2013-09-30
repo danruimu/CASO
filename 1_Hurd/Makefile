@@ -1,34 +1,35 @@
-PROG=proc procadv mps mtask thread thread-print vm vm-read msg
+PROG=proc procadv mps mtask thread thread-print msg vm vm-read
 CFLAGS=-D_GNU_SOURCE -O
+CC=gcc
 
 all: $(PROG)
 
 proc: proc.c 
-	gcc $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 procadv: procadv.c 
-	gcc $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 mps: mps.c print-task-info.c
-	gcc $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 mtask: mtask.c print-task-info.c
-	gcc $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 thread: thread.c
-	gcc $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 thread-print: thread.c
-	gcc $(CFLAGS) $< -o $@ -DPRINT
+	$(CC) $(CFLAGS) $< -o $@ -DPRINT
 
 msg: msg.c
-	cc $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 vm: vm.c
-	cc $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 vm-read: vm-read.c
-	cc $(CFLAGS) $< -o $@
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
 	rm -f $(PROG)
