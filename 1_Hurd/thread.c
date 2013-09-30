@@ -10,8 +10,11 @@
 #include <unistd.h>
 
 void thread_asshole () {
+#ifdef PRINT
 	fprintf(stdout,"Eres un PENE con cara\n");
+#else
 	while(1);
+#endif
 }
 
 int main () {
@@ -34,12 +37,7 @@ int main () {
 		exit (1);
 	}
 	
-	//TODO: change eip and esp at state_child, you can see thread_state_t define at
-	//      /usr/include/mach/machine/thread_status.h
-	//
-	
 	state_child_i386.eip = (unsigned int) thread_asshole;
-	//state_child_i386.esp = ??;
 
 	res = thread_set_state (child, i386_THREAD_STATE,(thread_state_t)&state_child_i386, state_Cnt);
 	if (res != KERN_SUCCESS) {

@@ -1,4 +1,4 @@
-PROG=proc procadv mps mtask thread vm vm-read msg
+PROG=proc procadv mps mtask thread thread-print vm vm-read msg
 CFLAGS=-D_GNU_SOURCE -O
 
 all: $(PROG)
@@ -17,6 +17,9 @@ mtask: mtask.c print-task-info.c
 
 thread: thread.c
 	gcc $(CFLAGS) $< -o $@
+
+thread-print: thread.c
+	gcc $(CFLAGS) $< -o $@ -DPRINT
 
 msg: msg.c
 	cc $(CFLAGS) $< -o $@
