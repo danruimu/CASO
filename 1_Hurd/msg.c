@@ -7,6 +7,8 @@
 #include <mach/thread_status.h>
 #include <hurd.h>
 #include <mach/message.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 int main () {
 
@@ -32,7 +34,7 @@ int main () {
 	if (pid == 0) {	//CHILD - SENDER
 		//TODO: Prepare the message header to be send
 		mach_msg_header_t sHeader;
-		sHeader.msgh_bits = MACH_MSG_TYPE_INTEGER_32; //mach_msg_type_t
+		sHeader.msgh_bits = MACH_MSG_TYPE_MOVE_SEND; //mach_msg_type_t
 		sHeader.msgh_size  = sizeof(mach_msg_header_t); //mach_msg_size_t
 		sHeader.msgh_remote_port  = host_privileged_port; //mach_port_t
 		sHeader.msgh_local_port  = MACH_PORT_NULL; //mach_port_t
@@ -45,12 +47,14 @@ int main () {
 			fprintf(stderr, "Error on sending message: 0x%x, %s\n", msg_res, mach_error_string(msg_res));
 			exit(1);
 		}
+		fprintf(stdout, "Message sent!\n");
 		exit(0);
 
 	} else {		//PARENT - RECEIVER
+		pid = wait(0);
 		//TODO: Prepare the message header to be receive
 		mach_msg_header_t rHeader;
-		rHeader.msgh_bits = MACH_MSGH_BITS_LOCAL_MASK; //mach_msg_type_t
+		rHeader.msgh_bits.
 		//rHeader->msgh_size  = ; //mach_msg_size_t - TO BE READ
 		rHeader.msgh_remote_port  = MACH_PORT_NULL; //mach_port_t
 		rHeader.msgh_local_port  = host_privileged_port; //mach_port_t
