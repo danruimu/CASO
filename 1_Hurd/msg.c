@@ -15,6 +15,7 @@ int main () {
 	pid_t pid;
 	mach_port_t host_privileged_port;
 	device_t device_privileged_port;
+	mach_msg_type_name_t tname;
 
 	res = get_privileged_ports(&host_privileged_port, &device_privileged_port);
 	if (res != KERN_SUCCESS) {
@@ -31,7 +32,7 @@ int main () {
 	if (pid == 0) {	//CHILD - SENDER
 		//TODO: Prepare the message header to be send
 		mach_msg_header_t sHeader;
-		sHeader.msgh_bits = MACH_MSGH_BITS_REMOTE_MASK; //mach_msg_type_t
+		sHeader.msgh_bits = MACH_MSG_TYPE_INTEGER_32; //mach_msg_type_t
 		sHeader.msgh_size  = sizeof(mach_msg_header_t); //mach_msg_size_t
 		sHeader.msgh_remote_port  = host_privileged_port; //mach_port_t
 		sHeader.msgh_local_port  = MACH_PORT_NULL; //mach_port_t
