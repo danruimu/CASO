@@ -1,0 +1,67 @@
+PROG
+----------- Execution 1 ------------
+Time elapsed:	5915.950ms
+Bandwith:    	33.81MB/s
+----------- Execution 2 ------------
+Time elapsed:	5967.811ms
+Bandwith:    	33.51MB/s
+----------- Execution 3 ------------
+Time elapsed:	6009.186ms
+Bandwith:    	33.28MB/s
+----------- Execution 4 ------------
+Time elapsed:	6014.587ms
+Bandwith:    	33.25MB/s
+----------- Execution 5 ------------
+Time elapsed:	5869.715ms
+Bandwith:    	34.07MB/s
+
+DD1
+----------- Execution 1 ------------
+0.32user 4.80system 0:10.86elapsed 47%CPU (0avgtext+0avgdata 3632maxresident)k
+0inputs+409600outputs (0major+282minor)pagefaults 0swaps
+----------- Execution 2 ------------
+0.28user 4.85system 0:11.37elapsed 45%CPU (0avgtext+0avgdata 3616maxresident)k
+0inputs+409600outputs (0major+280minor)pagefaults 0swaps
+----------- Execution 3 ------------
+0.28user 4.90system 0:11.26elapsed 45%CPU (0avgtext+0avgdata 3632maxresident)k
+0inputs+409600outputs (0major+281minor)pagefaults 0swaps
+----------- Execution 4 ------------
+0.34user 4.63system 0:07.84elapsed 63%CPU (0avgtext+0avgdata 3616maxresident)k
+0inputs+409600outputs (0major+280minor)pagefaults 0swaps
+----------- Execution 5 ------------
+0.37user 4.63system 0:07.55elapsed 66%CPU (0avgtext+0avgdata 3616maxresident)k
+0inputs+409600outputs (0major+280minor)pagefaults 0swaps
+
+DD2
+----------- Execution 1 ------------
+0.03user 0.80system 0:06.52elapsed 12%CPU (0avgtext+0avgdata 3632maxresident)k
+0inputs+409600outputs (0major+281minor)pagefaults 0swaps
+----------- Execution 2 ------------
+0.06user 0.77system 0:07.04elapsed 11%CPU (0avgtext+0avgdata 3632maxresident)k
+0inputs+409600outputs (0major+281minor)pagefaults 0swaps
+----------- Execution 3 ------------
+0.05user 0.78system 0:07.13elapsed 11%CPU (0avgtext+0avgdata 3648maxresident)k
+0inputs+409600outputs (0major+282minor)pagefaults 0swaps
+----------- Execution 4 ------------
+0.02user 0.80system 0:07.04elapsed 11%CPU (0avgtext+0avgdata 3632maxresident)k
+0inputs+409600outputs (0major+281minor)pagefaults 0swaps
+----------- Execution 5 ------------
+0.02user 0.81system 0:07.16elapsed 11%CPU (0avgtext+0avgdata 3632maxresident)k
+16inputs+409600outputs (0major+282minor)pagefaults 0swaps
+
+DD3
+----------- Execution 1 ------------
+0.00user 0.20system 0:00.20elapsed 98%CPU (0avgtext+0avgdata 3648maxresident)k
+0inputs+409600outputs (0major+282minor)pagefaults 0swaps
+----------- Execution 2 ------------
+0.01user 0.25system 0:06.00elapsed 4%CPU (0avgtext+0avgdata 3648maxresident)k
+0inputs+409600outputs (0major+282minor)pagefaults 0swaps
+----------- Execution 3 ------------
+0.00user 0.26system 0:06.33elapsed 4%CPU (0avgtext+0avgdata 3632maxresident)k
+0inputs+409600outputs (0major+281minor)pagefaults 0swaps
+----------- Execution 4 ------------
+0.01user 0.25system 0:06.48elapsed 4%CPU (0avgtext+0avgdata 3664maxresident)k
+0inputs+409600outputs (0major+283minor)pagefaults 0swaps
+----------- Execution 5 ------------
+0.00user 0.26system 0:06.35elapsed 4%CPU (0avgtext+0avgdata 3632maxresident)k
+0inputs+409600outputs (0major+281minor)pagefaults 0swaps
