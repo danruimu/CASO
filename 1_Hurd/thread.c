@@ -17,6 +17,8 @@ void thread_asshole () {
 #endif
 }
 
+int stack[8192];
+
 int main () {
 	kern_return_t res;
 	mach_port_t parent, child;
@@ -37,6 +39,7 @@ int main () {
 		exit (1);
 	}
 	
+	state_child_i386.uesp = (unsigned int) stack - 80;
 	state_child_i386.eip = (unsigned int) thread_asshole;
 
 	res = thread_set_state (child, i386_THREAD_STATE,(thread_state_t)&state_child_i386, state_Cnt);
