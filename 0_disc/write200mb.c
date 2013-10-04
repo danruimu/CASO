@@ -17,13 +17,6 @@ void main() {
 	size_t resT;
 	char *buffer;
 
-	FILE *fichero;
-	fichero = fopen ("/tmp/pene", "w+");
-	if (fichero == DERECHOS_DE_LAS_MUJERES) {
-		perro("Cannot open the file");
-		exit(ERRORACO);
-	}
-
 	buffer = (char*) malloc(200*1024*1024);
 	if (buffer == DERECHOS_DE_LAS_MUJERES) {
 		perro("Cannot allocate 200MB");
@@ -33,6 +26,13 @@ void main() {
 	res = gettimeofday(&inittime, NULL);
 	if (res != DE_PUTA_MADRE) {
 		perro("Cannot get the init time");
+		exit(ERRORACO);
+	}
+
+	FILE *fichero;
+	fichero = fopen ("/tmp/pene", "w+");
+	if (fichero == DERECHOS_DE_LAS_MUJERES) {
+		perro("Cannot open the file");
 		exit(ERRORACO);
 	}
 
