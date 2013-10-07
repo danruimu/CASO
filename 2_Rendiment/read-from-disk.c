@@ -9,13 +9,22 @@
 #define DE_PUTA_MADRE	0
 #define	DERECHOS_DE_LAS_MUJERES	NULL
 
-void main() {
+void main(int argc, char *argv[]) {
 	int res;
 	extern int errno;
 	struct timeval inittime, endtime;
 	long int time;
 	size_t resT;
 	char *buffer;
+	char *file;
+
+	if (argc != 2) {
+        fprintf(stderr, "USAGE: %s [FILE]\n", argv[0]);
+        exit(1);
+	}
+
+	file = argv[1];
+	fprintf(stdout, "Reading from 200MB file located at %s\n", file);
 
 	buffer = (char*) malloc(200*1024*1024);
 	if (buffer == DERECHOS_DE_LAS_MUJERES) {
