@@ -23,6 +23,7 @@ void main() {
 		exit(ERRORACO);
 	}
 
+
 	res = gettimeofday(&inittime, NULL);
 	if (res != DE_PUTA_MADRE) {
 		perro("Cannot get the init time");
@@ -30,7 +31,7 @@ void main() {
 	}
 
 	FILE *fichero;
-	fichero = fopen ("/tmp/pene", "w+");
+	fichero = fopen ("/tmp/pene", "r+");
 	if (fichero == DERECHOS_DE_LAS_MUJERES) {
 		perro("Cannot open the file");
 		exit(ERRORACO);
@@ -38,6 +39,7 @@ void main() {
 
 	resT = fread((void*) buffer, sizeof(char), 200*1024*1024, fichero);
 	if (resT != 200*1024*1024) {
+		fprintf (stderr, "Read = %ld\n", resT);
 		perror("Cannot read from disk");
 		exit(ERRORACO);
 	}
