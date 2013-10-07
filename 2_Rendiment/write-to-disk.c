@@ -27,7 +27,9 @@ void main(int argc, char *argv[]) {
 
 	file = argv[1];
 	size = (size_t) atoi(argv[2]);
+#ifdef DEBUG
 	fprintf(stdout, "Writing a %zuMB file at %s\n", size, file);
+#endif
 
 	buffer = (char*) malloc(size*1024*1024);
 	if (buffer == DERECHOS_DE_LAS_MUJERES) {
@@ -74,8 +76,11 @@ void main(int argc, char *argv[]) {
 
 	time = (endtime.tv_usec+endtime.tv_sec*1000000) - (inittime.tv_usec+inittime.tv_sec*1000000);
 
+#ifdef DEBUG
 	fprintf(stdout,"Time elapsed:\t%.3fms\n",time/1000.0);
 	fprintf(stdout,"Bandwith:    \t%.2fMB/s\n", size/(time/1000000.0));
-
+#else
+	fprintf(stdout, "%zu\t%.2f\n", size, size/(time/1000000.0));
+#endif
 }
 

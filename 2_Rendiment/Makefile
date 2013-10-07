@@ -1,13 +1,19 @@
-PROG=sleep_2 sbrk sbrk-incdec sched_yield getpid write-to-disk read-from-disk fork_waitpid
+PROG=sleep_2 sbrk sbrk-incdec sched_yield getpid write-to-disk read-from-disk fork_waitpid write-to-disk-plot read-from-disk-plot
 CC=gcc
 CFLAGS=-O
 
 all: $(PROG)
 
 write-to-disk: write-to-disk.c
-	$(CC) $(CFLAGS) $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@ -DDEBUG
 
 read-from-disk: read-from-disk.c
+	$(CC) $(CFLAGS) $^ -o $@ -DDEBUG
+
+write-to-disk-plot: write-to-disk.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+read-from-disk-plot: read-from-disk.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 sbrk: sbrk.c
