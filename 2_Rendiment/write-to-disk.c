@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
+#include <string.h>
 
 #define perro	perror
 #define ERRORACO	1
@@ -20,6 +21,12 @@ void main() {
 	buffer = (char*) malloc(200*1024*1024);
 	if (buffer == DERECHOS_DE_LAS_MUJERES) {
 		perro("Cannot allocate 200MB");
+		exit(ERRORACO);
+	}
+
+	buffer = (char*) memset(buffer, 0, 200*1024*1024);
+	if (buffer == DERECHOS_DE_LAS_MUJERES) {
+		perro("Cannot set buffer to 1");
 		exit(ERRORACO);
 	}
 
