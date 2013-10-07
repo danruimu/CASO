@@ -1,4 +1,4 @@
-PROG=sleep_2 sbrk sbrk-incdec sched_yield getpid write-to-disk read-from-disk
+PROG=sleep_2 sbrk sbrk-incdec sched_yield getpid write-to-disk read-from-disk fork_waitpid
 CC=gcc
 CFLAGS=-O
 
@@ -23,6 +23,9 @@ getpid: getpid.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 sleep_2: sleep_2.c
+	$(CC) $(CFLAGS) $^ -o $@
+
+fork_waitpid: fork_waitpid.c
 	$(CC) $(CFLAGS) $^ -o $@
 
 clean:
