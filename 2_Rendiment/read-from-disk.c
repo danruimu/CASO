@@ -17,18 +17,20 @@ void main(int argc, char *argv[]) {
 	size_t resT;
 	char *buffer;
 	char *file;
+	size_t size;
 
-	if (argc != 2) {
-        fprintf(stderr, "USAGE: %s [FILE]\n", argv[0]);
+	if (argc != 3) {
+        fprintf(stderr, "USAGE: %s [FILE] [SIZE_MB]\n", argv[0]);
         exit(1);
 	}
 
 	file = argv[1];
-	fprintf(stdout, "Reading from 200MB file located at %s\n", file);
+	size = (size_t) atoi(argv[2]);
+	fprintf(stdout, "Reading from %zuMB file located at %s\n", size, file);
 
-	buffer = (char*) malloc(200*1024*1024);
+	buffer = (char*) malloc(size*1024*1024);
 	if (buffer == DERECHOS_DE_LAS_MUJERES) {
-		perro("Cannot allocate 200MB");
+		perro("Cannot allocate enough memory");
 		exit(ERRORACO);
 	}
 
@@ -46,8 +48,8 @@ void main(int argc, char *argv[]) {
 		exit(ERRORACO);
 	}
 
-	resT = fread((void*) buffer, sizeof(char), 200*1024*1024, fichero);
-	if (resT != 200*1024*1024) {
+	resT = fread((void*) buffer, sizeof(char), size*1024*1024, fichero);
+	if (resT != size*1024*1024) {
 		fprintf (stderr, "Read = %ld\n", resT);
 		perror("Cannot read from disk");
 		exit(ERRORACO);
@@ -68,7 +70,7 @@ void main(int argc, char *argv[]) {
 	time = (endtime.tv_usec+endtime.tv_sec*1000000) - (inittime.tv_usec+inittime.tv_sec*1000000);
 
 	fprintf(stdout,"Time elapsed:\t%.3fms\n",time/1000.0);
-	fprintf(stdout,"Bandwith:    \t%.2fMB/s\n", 200.0/(time/1000000.0));
+	fprintf(stdout,"Bandwith:    \t%.2fMB/s\n", size/(time/1000000.0));
 
 }
 
