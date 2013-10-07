@@ -36,9 +36,9 @@ void main() {
 		exit(ERRORACO);
 	}
 
-	resT = fwrite((void*) buffer, sizeof(char), 200*1024*1024, fichero);
+	resT = fread((void*) buffer, sizeof(char), 200*1024*1024, fichero);
 	if (resT != 200*1024*1024) {
-		perror("Cannot write to disk");
+		perror("Cannot read from disk");
 		exit(ERRORACO);
 	}
 
