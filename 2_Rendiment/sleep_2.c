@@ -27,7 +27,7 @@ int main(int argc, char * argv [])
    for (i=0; i < n; i++) {
       res = sleep(1);
       if (res < 0) {
-         perror ("sched_yield");
+         perror ("sleep");
       }
    }
 
