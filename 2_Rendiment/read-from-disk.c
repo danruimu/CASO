@@ -52,8 +52,10 @@ void main(int argc, char *argv[]) {
 
 	resT = fread((void*) buffer, sizeof(char), size*1024*1024, fichero);
 	if (resT != size*1024*1024) {
-		perror("Cannot read from disk");
-		exit(ERRORACO);
+		fprintf(stderr, "Cannot read from disk %zuMB\n", size);
+		fprintf(stderr, "I'm only able to read %zuMB\n", resT/1024/1024);
+		//exit(ERRORACO);
+		size = resT/1024/1024;
 	}
 
 	res = fclose (fichero);
