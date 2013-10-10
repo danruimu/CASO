@@ -16,9 +16,7 @@ do
 	echo -n "Executing $i"
 	for j in `seq 1 10`
 	do
-		echo "----------Execution $j----------" >> $i.out
 		$PWD/$i >> $i.out
-		echo "--------------------------------" >> $i.out
 		echo -n "."
 	done
 
