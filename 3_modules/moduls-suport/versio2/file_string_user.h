@@ -1,0 +1,2 @@
+#define SET_STRING_ID 13
+#define GET_STRING_ID 17

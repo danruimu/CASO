@@ -1,0 +1,24 @@
+Fitxers de suport per a la pràctica de mòduls i dispositius de caràcter
+-----------------------------------------------------------------------
+
+.gdbinit                          # comanda lsmod per al gdb, per llistar la informació del mòdul
+dotgdbinit -> .gdbinit
+
+
+Makefile                          # fitxers per implementar el mòdul "hello world"
+interface.c
+implementation.c
+
+
+versio2/                          # fitxers de suport a les proves de l'entrada/sortida sobre 
+  Makefile                        # la versió 2 del mòdul de tipus caràcter
+  file_string_user.h              # fitxer amb la definició de les comandes SET/GET STRING,
+                                  # s'ha d'incloure des del mòdul i des de les aplicacions 
+                                  # d'usuari
+  play-simple.c                   # aplicació senzilla de proves
+  play.c                          # aplicació de proves més completa
+
+
+Els exemples fan servir el dispositiu de caràcter "mychardrv", que haureu de crear en el
+vostre sistema, en el directori actual on els executeu, amb la comanda "mknod".
+
