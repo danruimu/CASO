@@ -13,7 +13,7 @@ int main()
 {
    char * memory;
    int res, i;
-   int fd = open ("./mychardrv", O_RDWR, 0);
+   int fd = open ("mychardrv", O_RDWR, 0);
    if(fd == -1) {
 	  perror("Error opening the device");
 	  exit(0);

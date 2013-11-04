@@ -1,0 +1,12 @@
+PROG=play play-simple
+
+all: $(PROG)
+
+play: play.c
+	gcc $^ -o $@
+
+play-simple: play-simple.c
+	gcc $^ -o $@
+
+clean:
+	rm -rf $(PROG)
