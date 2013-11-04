@@ -14,6 +14,10 @@ int main()
    char * memory;
    int res, i;
    int fd = open ("mychardrv", O_RDWR, 0);
+   if(fd == -1) {
+	  perror("Error opening the device");
+	  exit(0);
+   }
 
 #if 0
    int fd2;
@@ -26,6 +30,10 @@ int main()
 
 
    res = ioctl (fd, GET_STRING_ID, 0);
+   if(res == -1) {
+		perror("Bad string id");
+		exit(-1);
+   }
    printf ("current string id %d\n", res);
 
 
