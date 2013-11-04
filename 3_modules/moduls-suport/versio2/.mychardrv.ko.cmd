@@ -1,0 +1,1 @@
+cmd_/home/druiz/CASO/3_modules/moduls-suport/versio2/mychardrv.ko := ld -r -m elf_x86_64 -T /usr/src/linux-3.11.6-1-ARCH/scripts/module-common.lds --build-id  -o /home/druiz/CASO/3_modules/moduls-suport/versio2/mychardrv.ko /home/druiz/CASO/3_modules/moduls-suport/versio2/mychardrv.o /home/druiz/CASO/3_modules/moduls-suport/versio2/mychardrv.mod.o

@@ -1,0 +1,1 @@
+cmd_/home/druiz/CASO/3_modules/moduls-suport/versio2/mychardrv.o := ld -m elf_x86_64   -r -o /home/druiz/CASO/3_modules/moduls-suport/versio2/mychardrv.o /home/druiz/CASO/3_modules/moduls-suport/versio2/interface.o /home/druiz/CASO/3_modules/moduls-suport/versio2/implementation.o 

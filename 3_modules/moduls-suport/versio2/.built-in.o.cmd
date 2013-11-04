@@ -1,0 +1,1 @@
+cmd_/home/druiz/CASO/3_modules/moduls-suport/versio2/built-in.o :=  rm -f /home/druiz/CASO/3_modules/moduls-suport/versio2/built-in.o; ar rcsD /home/druiz/CASO/3_modules/moduls-suport/versio2/built-in.o
