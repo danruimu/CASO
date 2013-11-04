@@ -1,0 +1,7 @@
+PROG=test
+
+test: test.c
+	gcc $^ -o $@
+
+clean:
+	rm -rf $(PROG)
