@@ -7,14 +7,21 @@
 #define MY_MAJOR 230
 
 #define MAX_IDS 500
+<<<<<<< HEAD
 #define BUFF_SIZE 4096
+=======
+>>>>>>> 759f3e3ac3a294db65368fdd6f7a06429d6b67f2
 #define SET_STRING_ID 13
 #define GET_STRING_ID 17
 
 MODULE_LICENSE("Dual BSD/GPL");
 static int nOpen = 0;
 static unsigned int currentBuffer = 0;
+<<<<<<< HEAD
 static char *bufferChar[MAX_IDS];
+=======
+char *bufferChar[MAX_IDS];
+>>>>>>> 759f3e3ac3a294db65368fdd6f7a06429d6b67f2
 
 static int obrir(struct inode * inode, struct file * file) {
 	nOpen++;
@@ -38,6 +45,7 @@ static int tancar(struct inode * inode, struct file * file) {
 }
 
 static ssize_t llegir(struct file * file, char __user * buffer,size_t size, loff_t * offset) {
+<<<<<<< HEAD
 	long res;
 	int offs;
 	offs = *offset;
@@ -55,10 +63,25 @@ static ssize_t escriure(struct file * file, const char __user * buffer, size_t s
 	offs = *offset;
 
 	printk("ESCRIURE: size=%d, offset=%d, currentBuffer=%d\n", size, offs, currentBuffer);
-	printk("ESCRIURE: bufferChar=%s\n", bufferChar[currentBuffer]);
+	printk("ESCRIURE: oldbufferChar=%s\n", bufferChar[currentBuffer]);
 	printk("ESCRIURE: buffer=%s\n", buffer);
 
    	res = copy_from_user(&bufferChar[currentBuffer][offs], buffer, (long unsigned int) size);
+
+	printk("ESCRIURE: newbufferChar=%s\n", bufferChar[currentBuffer]);
+
+=======
+	long res = copy_to_user(buffer, bufferChar[currentBuffer], (long unsigned int) size+(*offset));
+	return (ssize_t) res;
+}
+
+static ssize_t escriure(struct file * file, char __user * buffer, size_t size, loff_t * offset) {
+	if(bufferChar[currentBuffer] != NULL) {
+		kfree((const void*) bufferChar[currentBuffer]);
+	}
+	bufferChar[currentBuffer] = (char *) kzalloc(size, GFP_KERNEL);
+	long res = copy_from_user(bufferChar[currentBuffer], buffer, (long unsigned int) size+(*offset));
+>>>>>>> 759f3e3ac3a294db65368fdd6f7a06429d6b67f2
 	return (ssize_t) res;
 }
 
@@ -69,8 +92,12 @@ static long control(struct file * file, unsigned int command, unsigned long argu
 	if(argument > MAX_IDS) {
 		return -42;
 	}
+<<<<<<< HEAD
 	if(command == SET_STRING_ID) currentBuffer = argument;
 	else if(command == GET_STRING_ID) return currentBuffer;
+=======
+	currentBuffer = argument;
+>>>>>>> 759f3e3ac3a294db65368fdd6f7a06429d6b67f2
 	return 0;
 }
 
@@ -80,27 +107,44 @@ static const struct file_operations operacions = {
 	.release		= tancar,
 	.read			= llegir,
 	.write			= escriure,
+<<<<<<< HEAD
 	.unlocked_ioctl	= control,
 };
 
 static int mymodule_init(void) {
 	int res; unsigned int i;
+=======
+	.unlocked_ioctl	= control
+};
+
+static int mymodule_init(void) {
+	int res;
+>>>>>>> 759f3e3ac3a294db65368fdd6f7a06429d6b67f2
 	res = register_chrdev (MY_MAJOR, "CASO chardrv", &operacions);
 	if (res < 0) {
   		printk(KERN_DEBUG "Error registering the module\n");
 		return res;
 	}
   printk(KERN_DEBUG "Hello world!\n");
+<<<<<<< HEAD
   for(i = 0; i<MAX_IDS; ++i) {
 	bufferChar[i] = (char *) kzalloc(BUFF_SIZE, GFP_KERNEL);
   }
+=======
+>>>>>>> 759f3e3ac3a294db65368fdd6f7a06429d6b67f2
   return 0;
 }
 
 static void mymodule_exit(void) {
 	unsigned int i;
 	for(i = 0; i<MAX_IDS; ++i) {
+<<<<<<< HEAD
 		kfree((const void*) bufferChar[i]);
+=======
+		if(bufferChar[i] != NULL) {
+			kfree((const void*) bufferChar[i]);
+		}
+>>>>>>> 759f3e3ac3a294db65368fdd6f7a06429d6b67f2
 	}
 	unregister_chrdev(MY_MAJOR, "CASO chardrv");
   printk(KERN_DEBUG "Bye, cruel world\n");
