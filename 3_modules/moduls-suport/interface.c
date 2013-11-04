@@ -5,7 +5,7 @@
 #define MY_MAJOR 230
 
 MODULE_LICENSE("Dual BSD/GPL");
-int nOpen = 0;
+static int nOpen = 0;
 
 static int obrir(struct inode * inode, struct file * file) {
 	nOpen++;
@@ -30,7 +30,8 @@ static int tancar(struct inode * inode, struct file * file) {
 
 static ssize_t llegir(struct file * file, char __user * buffer,size_t size, loff_t * offset) {
 	if(sizeof(nOpen) <= size) {
-		*buffer = nOpen;
+		//*buffer = nOpen;
+		sprintf(buffer, "%d", nOpen);
 		return sizeof(nOpen);
 	}
 	return -42;

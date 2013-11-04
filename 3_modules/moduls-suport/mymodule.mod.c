@@ -20,6 +20,7 @@ __attribute__((section("__versions"))) = {
 	{ 0x92bb2bf4, "module_layout" },
 	{ 0x6bc3fbc0, "__unregister_chrdev" },
 	{ 0x848237df, "__register_chrdev" },
+	{ 0x91715312, "sprintf" },
 	{ 0x27e1a049, "printk" },
 	{ 0xbdfb6dbb, "__fentry__" },
 };
@@ -30,4 +31,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "60F45BA02E3A0CA065F8ACA");
+MODULE_INFO(srcversion, "8B01B7AAFE03E7EBE8F9682");
