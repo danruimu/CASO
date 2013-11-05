@@ -16,6 +16,3 @@ default:
 	$(MAKE) -C $(KDIR) M=$$PWD
 
 endif
-
-play: play.c
-	cc -O -o play play.c

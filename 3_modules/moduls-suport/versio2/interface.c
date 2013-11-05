@@ -41,28 +41,27 @@ static ssize_t llegir(struct file * file, char __user * buffer,size_t size, loff
 	long res;
 	int offs;
 	offs = *offset;
-	printk("LLEGIR: size=%d, offset=%d, currentBuffer=%d\n", size, offs, currentBuffer);
-	printk("LLEGIR: bufferChar=%s\n", bufferChar[currentBuffer]);
-	buffer = (char *) kzalloc(BUFF_SIZE, GFP_USER);
 	res = copy_to_user(buffer, &bufferChar[currentBuffer][offs], (long unsigned int) size);
-	printk("LLEGIR: buffer=%s\n", buffer);
-	return (ssize_t) res;
+	if(res != 0) {
+		printk(KERN_DEBUG "[ERROR] LLEGIR: No s'han copiat %ld de %ld\n", res, size);
+		return -EFAULT;
+	}
+	return (ssize_t) size - res;
 }
 
 static ssize_t escriure(struct file * file, const char __user * buffer, size_t size, loff_t * offset) {
 	long res;
 	int offs;
 	offs = *offset;
-
-	printk("ESCRIURE: size=%d, offset=%d, currentBuffer=%d\n", size, offs, currentBuffer);
-	printk("ESCRIURE: oldbufferChar=%s\n", bufferChar[currentBuffer]);
-	printk("ESCRIURE: buffer=%s\n", buffer);
-
+	if(bufferChar[currentBuffer] == NULL ) {
+		bufferChar[currentBuffer] = (char *) kzalloc(size, GFP_KERNEL);
+	}
    	res = copy_from_user(&bufferChar[currentBuffer][offs], buffer, (long unsigned int) size);
-
-	printk("ESCRIURE: newbufferChar=%s\n", bufferChar[currentBuffer]);
-
-	return (ssize_t) res;
+	if(res != 0) {
+		printk(KERN_DEBUG "[ERROR] ESCRIURE: No s'han copiat %ld de %ld\n", res, size);
+		return -EFAULT;
+	}
+	return (ssize_t) size - res;
 }
 
 static long control(struct file * file, unsigned int command, unsigned long argument) {
@@ -87,16 +86,17 @@ static const struct file_operations operacions = {
 };
 
 static int mymodule_init(void) {
-	int res; unsigned int i;
+	int res;
+	unsigned int i;
 	res = register_chrdev (MY_MAJOR, "CASO chardrv", &operacions);
 	if (res < 0) {
   		printk(KERN_DEBUG "Error registering the module\n");
 		return res;
 	}
+	for(i = 0; i<MAX_IDS; ++i) {
+		bufferChar[i] = NULL;
+	}
   printk(KERN_DEBUG "Hello world!\n");
-  for(i = 0; i<MAX_IDS; ++i) {
-	bufferChar[i] = (char *) kzalloc(BUFF_SIZE, GFP_KERNEL);
-  }
   return 0;
 }
 
