@@ -43,10 +43,13 @@ static ssize_t llegir(struct file * file, char __user * buffer,size_t size, loff
 	offs = *offset;
 	res = copy_to_user(buffer, &bufferChar[currentBuffer][offs], (long unsigned int) size);
 	if(res != 0) {
-		printk(KERN_DEBUG "[ERROR] LLEGIR: No s'han copiat %ld de %ld\n", res, size);
+		printk(KERN_DEBUG "[ERROR] LLEGIR: No s'han copiat %ld de %ld\n bytes", res, size);
 		return -EFAULT;
 	}
-	return (ssize_t) size - res;
+	if (size > strlen(&bufferChar[currentBuffer][offs])) 
+		return (ssize_t) strlen(&bufferChar[currentBuffer][offs])+1 - res;
+	else
+		return (ssize_t) size - res;
 }
 
 static ssize_t escriure(struct file * file, const char __user * buffer, size_t size, loff_t * offset) {
@@ -58,7 +61,7 @@ static ssize_t escriure(struct file * file, const char __user * buffer, size_t s
 	}
    	res = copy_from_user(&bufferChar[currentBuffer][offs], buffer, (long unsigned int) size);
 	if(res != 0) {
-		printk(KERN_DEBUG "[ERROR] ESCRIURE: No s'han copiat %ld de %ld\n", res, size);
+		printk(KERN_DEBUG "[ERROR] ESCRIURE: No s'han copiat %ld de %ld\n bytes", res, size);
 		return -EFAULT;
 	}
 	return (ssize_t) size - res;

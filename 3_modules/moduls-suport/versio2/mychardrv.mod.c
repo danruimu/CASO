@@ -20,6 +20,7 @@ __attribute__((section("__versions"))) = {
 	{ 0x7dc216d9, __VMLINUX_SYMBOL_STR(module_layout) },
 	{ 0x6bc3fbc0, __VMLINUX_SYMBOL_STR(__unregister_chrdev) },
 	{ 0xd2b09ce5, __VMLINUX_SYMBOL_STR(__kmalloc) },
+	{ 0x754d539c, __VMLINUX_SYMBOL_STR(strlen) },
 	{ 0xbb424283, __VMLINUX_SYMBOL_STR(__register_chrdev) },
 	{ 0x4f8b5ddb, __VMLINUX_SYMBOL_STR(_copy_to_user) },
 	{ 0x27e1a049, __VMLINUX_SYMBOL_STR(printk) },
@@ -34,4 +35,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "E35824FAF6387A73924F98A");
+MODULE_INFO(srcversion, "57C635AA55301A93EF64D9E");
