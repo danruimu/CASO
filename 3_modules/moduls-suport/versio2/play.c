@@ -64,7 +64,7 @@ int main()
    }
 
    for (i=0; i < 100; i++) cbuf[i] = 'a';
-   res = read(fd, cbuf, 26);
+   res = read(fd, cbuf, 25);
    if (res < 0) perror ("read");
    else {
       cbuf[res] = '\0';
@@ -72,7 +72,7 @@ int main()
    }
 
    for (i=0; i < 100; i++) cbuf[i] = 'a';
-   res = read(fd, cbuf, 27);
+   res = read(fd, cbuf, 26);
    if (res < 0) perror ("read");
    else {
       cbuf[res] = '\0';
@@ -111,7 +111,7 @@ int main()
    res = read(fd, cbuf, 28);
    if (res < 0) perror ("read");
    else {
-      cbuf[res] = '\0';
+      //cbuf[res] = '\0';
       printf ("Read '%s' (%d bytes)\n", cbuf, res);
    }
    
