@@ -65,10 +65,8 @@ int copy_from_xrd(void *dst, struct xrd_struct *xrd,
    int res = -ENODEV;
 
    // la vostra implementacio va aqui
-
-
-
-
+  	memcpy(dst, (xrd->disk_memory)+sector*SECTOR_SIZE, n);
+	res = 0;
    // fi de la vostra implementacio
 
    printk(KERN_DEBUG "copy_from_xrd retorna %d\n", res);

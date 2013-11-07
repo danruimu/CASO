@@ -42,6 +42,7 @@ __attribute__((section("__versions"))) = {
 	{ 0xbdfb6dbb, "__fentry__" },
 	{ 0xe55dd87c, "kmem_cache_alloc_trace" },
 	{ 0x37a0cba, "kfree" },
+	{ 0x69acdf38, "memcpy" },
 	{ 0x32828852, "add_disk" },
 };
 
@@ -51,4 +52,4 @@ __attribute__((section(".modinfo"))) =
 "depends=";
 
 
-MODULE_INFO(srcversion, "637627DC99DD756594CC356");
+MODULE_INFO(srcversion, "B01B7E4028B2365EA3E36CC");
