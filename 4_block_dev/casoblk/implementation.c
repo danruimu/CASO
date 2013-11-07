@@ -12,10 +12,14 @@
 char * alloc_disk_memory(unsigned long size)
 {
    char * p = NULL;
+   unsigned long i;
 
    // la vostra implementacio va aqui
-
-
+   	if(size > XRD_SIZE*1024) {
+		return -ENOMEM;
+	}
+	p = vmalloc(PAGE_ALIGN(size));
+	for(i = 0; i<size; ++i) p[i] = i%256;
    // fi de la vostra implementacio
 
    printk(KERN_DEBUG "alloc_disk_memory %ld address %p\n", size, p);
@@ -25,9 +29,13 @@ char * alloc_disk_memory(unsigned long size)
 
 void   free_disk_memory(char * disk_mem)
 {
+	unsigned int i;
+	char exists = 0;
    // la vostra implementacio va aqui
-
-
+	for(i=0; i<MAX_XRD && !exists; ++i) {
+		if(xrd_array[i]->disk_memory == disk_mem) exists=1;
+	}
+	vfree((const void*) disk_mem;
    // fi de la vostra implementacio
    printk(KERN_DEBUG "free_disk_memory %p\n", disk_mem);
 }
