@@ -216,7 +216,7 @@ static int xrd_do_bvec(struct xrd_struct *xrd, struct page *page,
                         goto out;
         }
 
-        mem = kmap_atomic(page, KM_USER0);
+        mem = kmap_atomic(page/*, KM_USER0*/);
         if (rw == READ) {
                 err = copy_from_xrd(mem + off, xrd, sector, len);
                 flush_dcache_page(page);
@@ -225,7 +225,7 @@ static int xrd_do_bvec(struct xrd_struct *xrd, struct page *page,
 		flush_dcache_page(page);
 		err = copy_to_xrd(xrd, mem + off, sector, len);
 	}
-	kunmap_atomic(mem, KM_USER0);
+	kunmap_atomic(mem/*, KM_USER0*/);
 out:
 	return err;
 }
