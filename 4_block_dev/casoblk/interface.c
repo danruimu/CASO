@@ -146,10 +146,9 @@ int xrd_open(struct block_device * bdev, fmode_t mode)
    return 0;
 }
 
-int xrd_release (struct gendisk * gd, fmode_t mode)
+void xrd_release (struct gendisk * gd, fmode_t mode)
 {
    printk(KERN_DEBUG "close disk\n");
-   return 0;
 }
 
 

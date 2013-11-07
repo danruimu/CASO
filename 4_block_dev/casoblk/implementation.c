@@ -65,7 +65,9 @@ int copy_from_xrd(void *dst, struct xrd_struct *xrd,
    int res = -ENODEV;
 
    // la vostra implementacio va aqui
-  	memcpy(dst, (xrd->disk_memory)+sector*SECTOR_SIZE, n);
+   unsigned long *src = (unsigned long *) (xrd->disk_memory + sector*SECTOR_SIZE);
+   if((void*)src >= (void*)(xrd->disk_memory + xrd_size)) return -ENOMEM;
+  	memcpy(dst, (void*) src, n);
 	res = 0;
    // fi de la vostra implementacio
 
@@ -80,10 +82,10 @@ int copy_to_xrd(struct xrd_struct *xrd, void *src,
    int res = -ENODEV;
    
    // la vostra implementacio va aqui
-
-
-
-
+   unsigned long *dst = (unsigned long *) (xrd->disk_memory + sector*SECTOR_SIZE);
+   if((void *)dst >= (void*)(xrd->disk_memory + xrd_size)) return -ENOMEM;
+   memcpy((void *) dst, src, n);	
+   res = 0;
    // fi de la vostra implementacio
 
    printk(KERN_DEBUG "copy_to_xrd retorna %d\n", res);

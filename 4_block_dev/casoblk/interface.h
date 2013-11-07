@@ -7,6 +7,8 @@
 #define XRD_MAJOR 240
 #define XRD_SIZE  16384
 
+#define DEBUG 1
+
 
 // Estructura que defineix el nostre disc
 struct xrd_struct {
