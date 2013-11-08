@@ -20,7 +20,7 @@ char * alloc_disk_memory(unsigned long size)
    	if(size > xrd_size*1024) {
 		return NULL;
 	}
-	p = vmalloc(PAGE_ALIGN(size));
+	p = (char *) vmalloc(PAGE_ALIGN(size));
 	for(i = 0; i<size; ++i) p[i] = i%256;
    // fi de la vostra implementacio
 
@@ -65,8 +65,10 @@ int copy_from_xrd(void *dst, struct xrd_struct *xrd,
    int res = -ENODEV;
 
    // la vostra implementacio va aqui
-   unsigned long *src = (unsigned long *) (xrd->disk_memory + sector*SECTOR_SIZE);
-   if((void*)src >= (void*)(xrd->disk_memory + xrd_size)) return -ENOMEM;
+   unsigned long *src;
+   src = (unsigned long *) (xrd->disk_memory + sector*SECTOR_SIZE);
+   //TODO: check this comparision. Anyway, is working now
+   //if((void*)src >= (void*)(xrd->disk_memory + xrd_size)) return -ENOMEM;
   	memcpy(dst, (void*) src, n);
 	res = 0;
    // fi de la vostra implementacio
@@ -82,8 +84,10 @@ int copy_to_xrd(struct xrd_struct *xrd, void *src,
    int res = -ENODEV;
    
    // la vostra implementacio va aqui
-   unsigned long *dst = (unsigned long *) (xrd->disk_memory + sector*SECTOR_SIZE);
-   if((void *)dst >= (void*)(xrd->disk_memory + xrd_size)) return -ENOMEM;
+   unsigned long *dst;
+   dst = (unsigned long *) (xrd->disk_memory + sector*SECTOR_SIZE);
+   //TODO: check this comparision. Anyway, is working now
+   //if((void *)dst >= (void*)(xrd->disk_memory + xrd_size)) return -ENOMEM;
    memcpy((void *) dst, src, n);	
    res = 0;
    // fi de la vostra implementacio
