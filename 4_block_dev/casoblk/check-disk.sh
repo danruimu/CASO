@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [ `whoami` != "root" ]
+then
+	echo "This script must be executed as root!"
+	exit -1
+fi
+
 fs=ext2
 
 if [ x$1 == xvfat ]; then
@@ -17,7 +23,7 @@ echo "** using $fs filesystem *******"
 if [[ `lsmod | grep myblkdrv` ]]; then
    echo "** Module myblkdrv is correctly loaded *******"
 else
-   echo "** Loading module myblkdrv *******"
+   echo "** loading module myblkdrv *******"
    insmod myblkdrv.ko
 fi
 
@@ -52,3 +58,5 @@ else
    echo "Please create an empty directory /mnt/point"
 fi
 
+echo "** Removing module myblkdrv *******"
+rmmod myblkdrv.ko
