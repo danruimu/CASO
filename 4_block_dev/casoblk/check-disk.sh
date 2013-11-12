@@ -18,6 +18,16 @@ then
 	fi
 fi
 
+dir_owner=`ls -ld . | awk '{ print $3 }'`
+dir_group=`ls -ld . | awk '{ print $4 }'`
+
+if [ $dir_owner != "root" -o $dir_group != "root" ]
+then
+	echo "** Folder must pertain to root to execute this script! **"
+	echo "** Modifying owner and group **"
+	chown root.root `ls -d .`
+fi
+
 fs=ext2
 
 if [ x$1 == xvfat ]; then
