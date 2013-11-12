@@ -102,6 +102,8 @@ rmmod myblkdrv.ko
 if [ x$success == x1 ]
 then
 	echo "Test   SUCCESSFUL!!"
+	exit 0
 else
-	echo "Test UNSUCCESSFUL!!!!"!
+	echo "Test UNSUCCESSFUL!!!!"
+	exit 1
 fi
