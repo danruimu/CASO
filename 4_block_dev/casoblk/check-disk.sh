@@ -44,7 +44,7 @@ if [ -d /mnt/point ]; then
    sleep 1 && echo "** mounting device *******" && sleep 1 &&
    mount /dev/xrd1 /mnt/point &&
    sleep 1 && echo "** copying files *******" && sleep 1 &&
-   tar cf - . | (cd /mnt/point; tar xf -) &&
+   tar cf - . | tar xf - -C /mnt/point &&
    sleep 1 && echo "** verifying files *******" && sleep 1 &&
    for i in `ls`; do echo "  ** comparing $i *******"; cmp $i /mnt/point/$i; done &&
    sleep 1 && echo "** unmounting device *******" && sleep 1 &&
@@ -59,4 +59,11 @@ else
 fi
 
 echo "** Removing module myblkdrv *******"
+sync
+sleep 1
+aux=`mount | grep /mnt/point`
+if [ -n "$aux" ]
+then
+	umount /mnt/point
+fi
 rmmod myblkdrv.ko
