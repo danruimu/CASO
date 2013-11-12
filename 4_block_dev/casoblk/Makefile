@@ -18,6 +18,6 @@ default:
 endif
 
 clean:
-	rm -f implementation.o  interface.o myblkdrv.o myblkdrv.mod.o \
-            myblkdrv.ko built-in.o myblkdrv.mod.c Module.symvers modules.order
+	rm -rf implementation.o  interface.o myblkdrv.o myblkdrv.mod.o \
+            myblkdrv.ko built-in.o myblkdrv.mod.c Module.symvers modules.order .*.cmd .tmp_versions
 
