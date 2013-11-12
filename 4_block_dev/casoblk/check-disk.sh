@@ -28,6 +28,13 @@ then
 	chown root.root `ls -d .`
 fi
 
+aux=`mount | grep /mnt/point`
+if [ -n "$aux" ]
+then
+	echo "** /mnt/point is currently mounted... unmounting **"
+	umount /mnt/point
+fi
+
 fs=ext2
 
 if [ x$1 == xvfat ]; then
@@ -42,14 +49,20 @@ if [ x$1 == xreiserfs ]; then
 fi
 echo "** using $fs filesystem *******"
 
-if [[ `lsmod | grep myblkdrv` ]]; then
-   echo "** Module myblkdrv is correctly loaded *******"
+#if [[ `lsmod | grep myblkdrv` ]]; then
+#	./reload_module.pl
+#	echo "** Module myblkdrv is correctly loaded *******"
+#else
+#	echo "** loading module myblkdrv *******"
+#	insmod myblkdrv.ko
+#fi
+if ./reload_module.pl 1
+then
+	echo "** Module myblkdrv is correctly loaded *******"
 else
-   echo "** loading module myblkdrv *******"
-   insmod myblkdrv.ko
+	echo "** Failed loading myblkdrv module *******"
+	exit -1
 fi
-
-
 
 if [ -d /mnt/point ]; then
 

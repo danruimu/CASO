@@ -21,9 +21,13 @@ if($res ne "") {
 	print "Module was not loaded, so it's not need to remove it\n";
 }
 
-print "Compiling the module\n";
-`make`;
+unless (@ARGV > 0) {
+	print "Compiling the module\n";
+	`make`;
+}
 
 print "Loading the module... ";
 `insmod ./$driver`;
 print "Done\n";
+
+exit 0;
