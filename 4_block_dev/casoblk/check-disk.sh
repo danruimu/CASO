@@ -6,6 +6,18 @@ then
 	exit -1
 fi
 
+if [ ! -e myblkdrv.ko ]
+then
+	echo "** module is not compiled, trying to compile it **"
+	if make
+	then
+		echo "** Success! **"
+	else
+		echo "** Failure... Exiting :-( **"
+		exit
+	fi
+fi
+
 fs=ext2
 
 if [ x$1 == xvfat ]; then
@@ -49,13 +61,9 @@ if [ -d /mnt/point ]; then
    for i in `ls`; do echo "  ** comparing $i *******"; cmp $i /mnt/point/$i; done &&
    sleep 1 && echo "** unmounting device *******" && sleep 1 &&
    umount /mnt/point && success=1
-   if [ x$success == x1 ]; then
-      echo "Test   SUCCESSFUL!!"
-   else
-      echo "Test UNSUCCESSFUL!!!!"!
-   fi
 else
    echo "Please create an empty directory /mnt/point"
+   exit -1
 fi
 
 echo "** Removing module myblkdrv *******"
@@ -67,3 +75,10 @@ then
 	umount /mnt/point
 fi
 rmmod myblkdrv.ko
+
+if [ x$success == x1 ]
+then
+	echo "Test   SUCCESSFUL!!"
+else
+	echo "Test UNSUCCESSFUL!!!!"!
+fi
