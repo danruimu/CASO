@@ -1,5 +1,46 @@
 #!/bin/bash
 
+if [ `whoami` != "root" ]
+then
+	echo "This script must be executed as root!"
+	exit -1
+fi
+
+if [ ! -e myblkdrv.ko ]
+then
+	echo "** module is not compiled, trying to compile it **"
+	if make
+	then
+		echo "** Success! **"
+	else
+		echo "** Failure... Exiting :-( **"
+		exit -1
+	fi
+fi
+
+dir_owner=`ls -ld . | awk '{ print $3 }'`
+dir_group=`ls -ld . | awk '{ print $4 }'`
+
+if [ $dir_owner != "root" -o $dir_group != "root" ]
+then
+	echo "** Folder must pertain to root to execute this script! **"
+	echo "** Modifying owner and group **"
+	chown root.root `ls -d .`
+fi
+
+if [ ! -d /mnt/point ]
+	echo "** /mnt/point doesn't exist! **"
+	echo "** Creating the folder **"
+	mkdir /mnt/point
+fi
+
+aux=`mount | grep /mnt/point`
+if [ -n "$aux" ]
+then
+	echo "** /mnt/point is currently mounted... unmounting **"
+	umount /mnt/point
+fi
+
 if [ x$1 == xvfat ]; then
    fs=vfat
 
@@ -24,14 +65,20 @@ else
 fi
 echo "** using $fs filesystem *******"
 
-if [[ `lsmod | grep myblkdrv` ]]; then
-   echo "** Module myblkdrv is correctly loaded *******"
+#if [[ `lsmod | grep myblkdrv` ]]; then
+#   echo "** Module myblkdrv is correctly loaded *******"
+#else
+#   echo "** Loading module myblkdrv *******"
+#   insmod myblkdrv.ko
+#fi
+
+if ./reload_module.pl 1
+then
+	echo "** Module myblkdrv is correctly loaded *******"
 else
-   echo "** Loading module myblkdrv *******"
-   insmod myblkdrv.ko
+    echo "** Failed loading myblkdrv module *******"
+    exit -1
 fi
-
-
 
 if [ -d /mnt/point ]; then
 
@@ -55,12 +102,23 @@ if [ -d /mnt/point ]; then
    for i in `ls`; do echo "  ** comparing $i *******"; cmp $i /mnt/point/$i; done &&
    sleep 1 && echo "** unmounting device *******" && sleep 1 &&
    umount /mnt/point && success=1
-   if [ x$success == x1 ]; then
-      echo "Test   SUCCESSFUL!!"
-   else
-      echo "Test UNSUCCESSFUL!!!!"!
-   fi
 else
    echo "Please create an empty directory /mnt/point"
 fi
 
+echo "** Removing module myblkdrv *******"
+sync
+sleep 1
+aux=`mount | grep /mnt/point`
+if [ -n "$aux" ]
+then
+	umount /mnt/point
+fi
+rmmod myblkdrv
+
+if [ x$success == x1 ]; then
+	echo "Test   SUCCESSFUL!!"
+else
+	echo "Test UNSUCCESSFUL!!!!"
+	exit 1
+fi
