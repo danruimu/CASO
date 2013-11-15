@@ -29,6 +29,7 @@ then
 fi
 
 if [ ! -d /mnt/point ]
+then
 	echo "** /mnt/point doesn't exist! **"
 	echo "** Creating the folder **"
 	mkdir /mnt/point
