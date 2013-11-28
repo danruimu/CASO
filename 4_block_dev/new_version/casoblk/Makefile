@@ -19,5 +19,8 @@ endif
 
 clean:
 	rm -rf implementation.o  interface.o myblkdrv.o myblkdrv.mod.o \
-            myblkdrv.ko built-in.o myblkdrv.mod.c Module.symvers modules.order .*.cmd .tmp_versions
+            myblkdrv.ko built-in.o myblkdrv.mod.c Module.symvers \
+            modules.order .implementation.o.cmd .myblkdrv.mod.o.cmd \
+            .built-in.o.cmd .myblkdrv.o.cmd .myblkdrv.ko.cmd .tmp_versions \
+            .interface.o.cmd
 

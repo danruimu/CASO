@@ -7,6 +7,7 @@
 #define XRD_MAJOR 240
 #define XRD_SIZE  16384
 
+
 // Estructura que defineix el nostre disc
 struct xrd_struct {
    int                     xrd_num;        // numero del disc, 0, 1...

@@ -14,7 +14,7 @@ then
 		echo "** Success! **"
 	else
 		echo "** Failure... Exiting :-( **"
-		exit
+		exit -1
 	fi
 fi
 
@@ -28,6 +28,13 @@ then
 	chown root.root `ls -d .`
 fi
 
+if [ ! -d /mnt/point ]
+then
+	echo "** /mnt/point doesn't exist! **"
+	echo "** Creating the folder **"
+	mkdir /mnt/point
+fi
+
 aux=`mount | grep /mnt/point`
 if [ -n "$aux" ]
 then
@@ -35,33 +42,43 @@ then
 	umount /mnt/point
 fi
 
-fs=ext2
-
 if [ x$1 == xvfat ]; then
    fs=vfat
-fi
-if [ x$1 == xext2 ]; then
+
+elif [ x$1 == xext2 ]; then
    fs=ext2
-fi
-if [ x$1 == xreiserfs ]; then
+
+elif [ x$1 == xreiserfs ]; then
    fs=reiserfs
    journal_size=2048
+
+elif [ x$1 == xreiser4 ]; then
+   fs=reiser4
+   journal_size=2048
+
+elif [ x$1 == xext3 ]; then
+   fs=ext3
+elif [ x$1 == xext4 ]; then
+   fs=ext4
+else
+   echo "Us: check-disk.sh <filesystem-type>"
+   exit 1
 fi
 echo "** using $fs filesystem *******"
 
 #if [[ `lsmod | grep myblkdrv` ]]; then
-#	./reload_module.pl
-#	echo "** Module myblkdrv is correctly loaded *******"
+#   echo "** Module myblkdrv is correctly loaded *******"
 #else
-#	echo "** loading module myblkdrv *******"
-#	insmod myblkdrv.ko
+#   echo "** Loading module myblkdrv *******"
+#   insmod myblkdrv.ko
 #fi
+
 if ./reload_module.pl 1
 then
 	echo "** Module myblkdrv is correctly loaded *******"
 else
-	echo "** Failed loading myblkdrv module *******"
-	exit -1
+    echo "** Failed loading myblkdrv module *******"
+    exit -1
 fi
 
 if [ -d /mnt/point ]; then
@@ -69,24 +86,25 @@ if [ -d /mnt/point ]; then
    success=0;
 
    echo "** creating $fs filesystem *******" && sleep 1 &&
-   if [ x$journal_size == x ]; then
-       mkfs -t $fs /dev/xrd1 
-   else 
+   if [ x$fs == xreiser4 ]; then
+       mkfs -t $fs -f -s $journal_size /dev/xrd1
+   elif [ x$fs == xreiserfs ]; then
        mkfs -t $fs -s $journal_size /dev/xrd1
+   else 
+       mkfs -t $fs /dev/xrd1 
    fi &&
    sleep 1 && echo "** checking $fs filesystem *******" && sleep 1 &&
-   fsck /dev/xrd1 &&
+   fsck -t $fs /dev/xrd1 &&
    sleep 1 && echo "** mounting device *******" && sleep 1 &&
    mount /dev/xrd1 /mnt/point &&
    sleep 1 && echo "** copying files *******" && sleep 1 &&
-   tar cf - . | tar xf - -C /mnt/point &&
+   tar cf - . | (cd /mnt/point; tar  xf -; exit 0) &&
    sleep 1 && echo "** verifying files *******" && sleep 1 &&
    for i in `ls`; do echo "  ** comparing $i *******"; cmp $i /mnt/point/$i; done &&
    sleep 1 && echo "** unmounting device *******" && sleep 1 &&
    umount /mnt/point && success=1
 else
    echo "Please create an empty directory /mnt/point"
-   exit -1
 fi
 
 echo "** Removing module myblkdrv *******"
@@ -97,12 +115,10 @@ if [ -n "$aux" ]
 then
 	umount /mnt/point
 fi
-rmmod myblkdrv.ko
+rmmod myblkdrv
 
-if [ x$success == x1 ]
-then
+if [ x$success == x1 ]; then
 	echo "Test   SUCCESSFUL!!"
-	exit 0
 else
 	echo "Test UNSUCCESSFUL!!!!"
 	exit 1

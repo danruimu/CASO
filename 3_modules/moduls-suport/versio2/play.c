@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/file.h>
 #include <sys/mman.h>
+#include <string.h>
 
 #include "file_string_user.h"
 
@@ -34,9 +36,7 @@ int main()
 		perror("Bad string id");
 		exit(-1);
    }
-   printf ("current string id %d\n", res);
-
-
+   printf("current string id %d\n", res);
 
    res = read(fd, buf, 4096);
    if (res < 0) perror ("read");
@@ -91,14 +91,14 @@ int main()
    res = ioctl (fd, SET_STRING_ID, 91);
    if (res < 0) perror ("ioctl SET_STRING_ID");
    
-   memory = mmap(0x100000000000, getpagesize(), PROT_READ | PROT_WRITE, 
+   memory = mmap((void *)0x100000000000, getpagesize(), PROT_READ | PROT_WRITE, 
                        MAP_FIXED | MAP_ANONYMOUS | MAP_PRIVATE,
                        -1, 0L);
    if (memory == (void *) -1) {
       perror ("mmap");
       exit(1);
    }
-   printf ("memory at %lx\n", memory);
+   printf ("memory at %lx\n", (long unsigned int) memory);
 
 //   memory[4096] = 0;
    
