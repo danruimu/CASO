@@ -1,0 +1,1 @@
+cmd_/home/panoli/CASO/4_block_dev/casoblk/myblkdrv.o := ld -m elf_x86_64   -r -o /home/panoli/CASO/4_block_dev/casoblk/myblkdrv.o /home/panoli/CASO/4_block_dev/casoblk/interface.o /home/panoli/CASO/4_block_dev/casoblk/implementation.o 

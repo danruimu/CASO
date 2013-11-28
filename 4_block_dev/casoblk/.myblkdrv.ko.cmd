@@ -1,0 +1,1 @@
+cmd_/home/panoli/CASO/4_block_dev/casoblk/myblkdrv.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.8.0-31-generic/scripts/module-common.lds --build-id  -o /home/panoli/CASO/4_block_dev/casoblk/myblkdrv.ko /home/panoli/CASO/4_block_dev/casoblk/myblkdrv.o /home/panoli/CASO/4_block_dev/casoblk/myblkdrv.mod.o
