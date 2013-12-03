@@ -1,1 +1,0 @@
-cmd_/home/druiz/CASO/CASO/4_block_dev/new_version/casoblk/myblkdrv.o := ld -m elf_x86_64   -r -o /home/druiz/CASO/CASO/4_block_dev/new_version/casoblk/myblkdrv.o /home/druiz/CASO/CASO/4_block_dev/new_version/casoblk/interface.o /home/druiz/CASO/CASO/4_block_dev/new_version/casoblk/implementation.o 

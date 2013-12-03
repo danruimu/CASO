@@ -1,0 +1,434 @@
+----------------------------------------------------
+| Prova |               Resultat                   |
+----------------------------------------------------
+|   01  |                 OK                       |
+----------------------------------------------------
+|   02  |                 OK                       |
+----------------------------------------------------
+|   03  |                 OK                       |
+----------------------------------------------------
+|   04  |                 OK                       |
+----------------------------------------------------
+|   05  |                 OK                       |
+----------------------------------------------------
+|   06  |                 OK                       |
+----------------------------------------------------
+|   07  |                 OK                       |
+----------------------------------------------------
+|   08  |                 OK                       |
+----------------------------------------------------
+|   09  |                 OK                       |
+----------------------------------------------------
+|   10  |                 OK                       |
+----------------------------------------------------
+|   11  |                 OK                       |
+----------------------------------------------------
+|   12  |                 OK                       |
+----------------------------------------------------
+|   13  |                 OK                       |
+----------------------------------------------------
+|   14  |                 OK                       |
+----------------------------------------------------
+|   15  |        Veure apartat següent             |
+----------------------------------------------------
+
+------------------ Sortida check-disk.sh ----------------------
+
+***************************************************************
+************************** EXT2 *******************************
+***************************************************************
+
+** using ext2 filesystem *******
+Module was not loaded, so it's not need to remove it
+Loading the module... Done
+** Module myblkdrv is correctly loaded *******
+** creating ext2 filesystem *******
+mke2fs 1.42.8 (20-Jun-2013)
+Discarding device blocks: done                            
+Filesystem label=
+OS type: Linux
+Block size=1024 (log=0)
+Fragment size=1024 (log=0)
+Stride=0 blocks, Stripe width=0 blocks
+4096 inodes, 16384 blocks
+819 blocks (5.00%) reserved for the super user
+First data block=1
+Maximum filesystem blocks=16777216
+2 block groups
+8192 blocks per group, 8192 fragments per group
+2048 inodes per group
+Superblock backups stored on blocks: 
+	8193
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Writing superblocks and filesystem accounting information: done
+
+** checking ext2 filesystem *******
+fsck from util-linux 2.20.1
+e2fsck 1.42.8 (20-Jun-2013)
+/dev/xrd1: clean, 11/4096 files, 661/16384 blocks
+** mounting device *******
+** copying files *******
+** verifying files *******
+  ** comparing built-in.o *******
+  ** comparing check-disk.sh *******
+  ** comparing check.sh *******
+  ** comparing implementation.c *******
+  ** comparing implementation.o *******
+  ** comparing interface.c *******
+  ** comparing interface.h *******
+  ** comparing interface.o *******
+  ** comparing Makefile *******
+  ** comparing modules.order *******
+  ** comparing Module.symvers *******
+  ** comparing myblkdrv.ko *******
+  ** comparing myblkdrv.mod.c *******
+  ** comparing myblkdrv.mod.o *******
+  ** comparing myblkdrv.o *******
+  ** comparing reload_module.pl *******
+** unmounting device *******
+** Removing module myblkdrv *******
+Test   SUCCESSFUL!!
+
+***************************************************************
+*************************** VFAT ******************************
+***************************************************************
+
+** using vfat filesystem *******
+Module was not loaded, so it's not need to remove it
+Loading the module... Done
+** Module myblkdrv is correctly loaded *******
+** creating vfat filesystem *******
+mkfs.vfat 3.0.16 (01 Mar 2013)
+** checking vfat filesystem *******
+fsck from util-linux 2.20.1
+dosfsck 3.0.16, 01 Mar 2013, FAT32, LFN
+/dev/xrd1: 0 files, 0/8167 clusters
+** mounting device *******
+** copying files *******
+** verifying files *******
+  ** comparing built-in.o *******
+  ** comparing check-disk.sh *******
+  ** comparing check.sh *******
+  ** comparing implementation.c *******
+  ** comparing implementation.o *******
+  ** comparing interface.c *******
+  ** comparing interface.h *******
+  ** comparing interface.o *******
+  ** comparing Makefile *******
+  ** comparing modules.order *******
+  ** comparing Module.symvers *******
+  ** comparing myblkdrv.ko *******
+  ** comparing myblkdrv.mod.c *******
+  ** comparing myblkdrv.mod.o *******
+  ** comparing myblkdrv.o *******
+  ** comparing reload_module.pl *******
+** unmounting device *******
+** Removing module myblkdrv *******
+Test   SUCCESSFUL!!
+
+*************************************************************** 
+*************************** EXT3 ****************************** 
+*************************************************************** 
+
+** using ext3 filesystem *******
+Module was not loaded, so it's not need to remove it
+Loading the module... Done
+** Module myblkdrv is correctly loaded *******
+** creating ext3 filesystem *******
+mke2fs 1.42.8 (20-Jun-2013)
+Discarding device blocks: done                            
+Filesystem label=
+OS type: Linux
+Block size=1024 (log=0)
+Fragment size=1024 (log=0)
+Stride=0 blocks, Stripe width=0 blocks
+4096 inodes, 16384 blocks
+819 blocks (5.00%) reserved for the super user
+First data block=1
+Maximum filesystem blocks=16777216
+2 block groups
+8192 blocks per group, 8192 fragments per group
+2048 inodes per group
+Superblock backups stored on blocks: 
+	8193
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (1024 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+** checking ext3 filesystem *******
+fsck from util-linux 2.20.1
+e2fsck 1.42.8 (20-Jun-2013)
+/dev/xrd1: clean, 11/4096 files, 1690/16384 blocks
+** mounting device *******
+** copying files *******
+** verifying files *******
+  ** comparing built-in.o *******
+  ** comparing check-disk.sh *******
+  ** comparing check.sh *******
+  ** comparing implementation.c *******
+  ** comparing implementation.o *******
+  ** comparing interface.c *******
+  ** comparing interface.h *******
+  ** comparing interface.o *******
+  ** comparing Makefile *******
+  ** comparing modules.order *******
+  ** comparing Module.symvers *******
+  ** comparing myblkdrv.ko *******
+  ** comparing myblkdrv.mod.c *******
+  ** comparing myblkdrv.mod.o *******
+  ** comparing myblkdrv.o *******
+  ** comparing reload_module.pl *******
+** unmounting device *******
+** Removing module myblkdrv *******
+Test   SUCCESSFUL!!
+
+***************************************************************
+*************************** EXT4 ******************************
+***************************************************************
+
+** using ext4 filesystem *******
+Module was not loaded, so it's not need to remove it
+Loading the module... Done
+** Module myblkdrv is correctly loaded *******
+** creating ext4 filesystem *******
+mke2fs 1.42.8 (20-Jun-2013)
+Discarding device blocks: done                            
+Filesystem label=
+OS type: Linux
+Block size=1024 (log=0)
+Fragment size=1024 (log=0)
+Stride=0 blocks, Stripe width=0 blocks
+4096 inodes, 16384 blocks
+819 blocks (5.00%) reserved for the super user
+First data block=1
+Maximum filesystem blocks=16777216
+2 block groups
+8192 blocks per group, 8192 fragments per group
+2048 inodes per group
+Superblock backups stored on blocks: 
+	8193
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (1024 blocks): done
+Writing superblocks and filesystem accounting information: done
+
+** checking ext4 filesystem *******
+fsck from util-linux 2.20.1
+e2fsck 1.42.8 (20-Jun-2013)
+/dev/xrd1: clean, 11/4096 files, 1685/16384 blocks
+** mounting device *******
+** copying files *******
+** verifying files *******
+  ** comparing built-in.o *******
+  ** comparing check-disk.sh *******
+  ** comparing check.sh *******
+  ** comparing implementation.c *******
+  ** comparing implementation.o *******
+  ** comparing interface.c *******
+  ** comparing interface.h *******
+  ** comparing interface.o *******
+  ** comparing Makefile *******
+  ** comparing modules.order *******
+  ** comparing Module.symvers *******
+  ** comparing myblkdrv.ko *******
+  ** comparing myblkdrv.mod.c *******
+  ** comparing myblkdrv.mod.o *******
+  ** comparing myblkdrv.o *******
+  ** comparing reload_module.pl *******
+** unmounting device *******
+** Removing module myblkdrv *******
+Test   SUCCESSFUL!!
+
+***************************************************************
+************************* REISERFS ****************************
+***************************************************************
+
+** using reiserfs filesystem *******
+Module was not loaded, so it's not need to remove it
+Loading the module... Done
+** Module myblkdrv is correctly loaded *******
+** creating reiserfs filesystem *******
+mkfs.reiserfs 3.6.21 (2009 www.namesys.com)
+
+A pair of credits:
+Lycos Europe  (www.lycos-europe.com)  had  a  support  contract  with  us  that
+consistently came in just when we would otherwise have missed payroll, and that
+they kept doubling every year. Much thanks to them.
+
+Alexander Zarochentcev  (zam)  wrote the high low priority locking code, online
+resizer for V3 and V4, online repacker for V4, block allocation code, and major
+parts of  the flush code,  and maintains the transaction manager code.  We give
+him the stuff  that we know will be hard to debug,  or needs to be very cleanly
+structured.
+
+
+Guessing about desired format.. Kernel 3.11.0-12-generic is running.
+Format 3.6 with non-standard journal
+Count of blocks on the device: 4096
+Number of blocks consumed by mkreiserfs formatting process: 2067
+Blocksize: 4096
+Hash function used to sort names: "r5"
+Journal Size 2048 blocks (first block 18)
+Journal Max transaction length 1023
+inode generation number: 0
+UUID: 4bf5dcb5-9c28-4f3b-90ee-1ef8c2956eed
+ATTENTION: YOU SHOULD REBOOT AFTER FDISK!
+	ALL DATA WILL BE LOST ON '/dev/xrd1'!
+Continue (y/n):y
+Initializing journal - 0%....20%....40%....60%....80%....100%
+Syncing..ok
+ReiserFS is successfully created on /dev/xrd1.
+** checking reiserfs filesystem *******
+fsck from util-linux 2.20.1
+reiserfsck 3.6.21 (2009 www.namesys.com)
+
+*************************************************************
+** If you are using the latest reiserfsprogs and  it fails **
+** please  email bug reports to reiserfs-list@namesys.com, **
+** providing  as  much  information  as  possible --  your **
+** hardware,  kernel,  patches,  settings,  all reiserfsck **
+** messages  (including version),  the reiserfsck logfile, **
+** check  the  syslog file  for  any  related information. **
+** If you would like advice on using this program, support **
+** is available  for $25 at  www.namesys.com/support.html. **
+*************************************************************
+
+Will read-only check consistency of the filesystem on /dev/xrd1
+Will put log info to 'stdout'
+
+Do you want to run this program?[N/Yes] (note need to type Yes if you do):Yes
+###########
+reiserfsck --check started at Tue Dec  3 12:31:41 2013
+###########
+Replaying journal: No transactions found
+Checking internal tree.. finished
+Comparing bitmaps..finished
+Checking Semantic tree:
+finished
+No corruptions found
+There are on the filesystem:
+	Leaves 1
+	Internal nodes 0
+	Directories 1
+	Other files 0
+	Data block pointers 0 (0 of them are zero)
+	Safe links 0
+###########
+reiserfsck finished at Tue Dec  3 12:31:41 2013
+###########
+** mounting device *******
+** copying files *******
+** verifying files *******
+  ** comparing built-in.o *******
+  ** comparing check-disk.sh *******
+  ** comparing check.sh *******
+  ** comparing implementation.c *******
+  ** comparing implementation.o *******
+  ** comparing interface.c *******
+  ** comparing interface.h *******
+  ** comparing interface.o *******
+  ** comparing Makefile *******
+  ** comparing modules.order *******
+  ** comparing Module.symvers *******
+  ** comparing myblkdrv.ko *******
+  ** comparing myblkdrv.mod.c *******
+  ** comparing myblkdrv.mod.o *******
+  ** comparing myblkdrv.o *******
+  ** comparing reload_module.pl *******
+** unmounting device *******
+** Removing module myblkdrv *******
+Test   SUCCESSFUL!!
+
+***************************************************************
+************************* REISER4 *****************************
+***************************************************************
+
+** using reiser4 filesystem *******
+Module was not loaded, so it's not need to remove it
+Loading the module... Done
+** Module myblkdrv is correctly loaded *******
+** creating reiser4 filesystem *******
+mkfs.reiser4 1.0.7
+Copyright (C) 2001-2005 by Hans Reiser, licensing governed by reiser4progs/COPYING. 
+
+Block size 4096 will be used.                                                            
+Linux 3.11.0-12-generic is detected.                                                     
+Uuid 2a991ae7-644a-4af6-89e4-827e677aeec6 will be used.                                  
+Reiser4 is going to be created on /dev/xrd1.                                             
+(Yes/No): Yes
+Creating reiser4 on /dev/xrd1 ... done                                                   
+** checking reiser4 filesystem *******
+fsck from util-linux 2.20.1
+*******************************************************************
+This is an EXPERIMENTAL version of fsck.reiser4. Read README first.
+*******************************************************************
+
+Fscking the /dev/xrd1 block device.                                                      
+Will check the consistency of the Reiser4 SuperBlock.                                    
+Will check the consistency of the Reiser4 FileSystem.                                    
+Continue?                                                                                
+(Yes/No): Yes
+***** fsck.reiser4 started at Tue Dec  3 12:32:34 2013
+Reiser4 fs was detected on /dev/xrd1.                                                    
+Master super block (16): 
+magic:		ReIsEr4 
+blksize:	4096 
+format:		0x0 (format40) 
+uuid:		2a991ae7-644a-4af6-89e4-827e677aeec6 
+label:		<none> 
+ 
+Format super block (17): 
+plugin:		format40 
+description:	Disk-format plugin. 
+version:	0 
+magic:		ReIsEr40FoRmAt 
+mkfs id:	0x1bc1ddb9 
+flushes:	0 
+blocks:		512 
+free blocks:	487 
+root block:	23 
+tail policy:	0x2 (smart) 
+next oid:	0x10001 
+file count:	2 
+tree height:	2 
+key policy:	LARGE 
+ 
+ 
+CHECKING THE STORAGE TREE                                                                
+        Read nodes 2                                                                     
+	Nodes left in the tree 2 
+		Leaves of them 1, Twigs of them 1 
+	Time interval: Tue Dec  3 12:32:34 2013 - Tue Dec  3 12:32:34 2013 
+CHECKING EXTENT REGIONS.                                                                 
+        Read twigs 1                                                                     
+	Time interval: Tue Dec  3 12:32:34 2013 - Tue Dec  3 12:32:34 2013 
+CHECKING THE SEMANTIC TREE                                                               
+        Found 2 objects (some could be encountered more then once).                      
+	Time interval: Tue Dec  3 12:32:34 2013 - Tue Dec  3 12:32:34 2013 
+***** fsck.reiser4 finished at Tue Dec  3 12:32:34 2013
+Closing fs...done
+
+FS is consistent.
+
+** mounting device *******
+mount: unknown filesystem type 'reiser4'
+** Removing module myblkdrv *******
+Test UNSUCCESSFUL!!!!
+
+***************************************************************
+*********************** COMENTARIS ****************************
+***************************************************************
+
+Tots els test han estat satisfactoris excepte el que intentava crear un fs del tipus reiser4. Això és degut a que aquest fs no es distribueix de forma conjunta amb el kernel de Linux, per tant, s'ha de parxejar el kernel o bé utilitzar la branca -mm del kernel de Linux, mantiguda per Andrew Morton[1].
+
+Els desenvolupadors del kernel de Linux diuen que Reiser4 no es fidel a la convenció de codificació estandar[2], mentre's que Hans Reiser[3] argument que els motius per no incloure el fs Reiser4 al kernel de Linux són purament polítics[4].
+
+[1] Documentation/filesystems/reiser4.txt from a reiser4-patched kernel source, "By default file in reiser4 have 64 bit timestamps." https://www.kernel.org/doc/Documentation/filesystems/00-INDEX
+[2] http://archive.is/iduX
+[3] Creader del FS ReiserFS i Reiser4
+[4] https://lkml.org/lkml/2006/7/21/109
