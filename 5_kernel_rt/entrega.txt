@@ -36,9 +36,7 @@ Test Duration: 0 days, 0 hours, 0 minutes, 11 seconds
 
 <----------------------------> Explicació <----------------------------->
 
-TODO: dir si el nostre sistema original tracta la inversió de prioritats.
-Jo diria que no ja que el nombre d'inversions és bastant més gran. Per altra banda, per estar segurs s'hauria de mirar que és el que indica si el sistema tracta la inversió o no.
-
+El nostre sistema original tracta la inversió de prioritats tal i com es pot veure a la execució del software.
 
 ********************************************************************************
 ********************************* cyclictest ***********************************
